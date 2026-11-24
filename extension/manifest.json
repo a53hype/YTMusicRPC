@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Music Discord RPC",
+  "version": "1.5.2",
+  "description": "Shares the active YouTube Music track and playback position with Discord Rich Presence using player API, HTML media and metadata fallbacks.",
+  "permissions": [
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://music.youtube.com/*",
+    "http://127.0.0.1:8765/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://music.youtube.com/*"
+      ],
+      "js": [
+        "player_probe.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://music.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "YouTube Music Discord RPC",
+    "default_popup": "popup.html"
+  }
+}
